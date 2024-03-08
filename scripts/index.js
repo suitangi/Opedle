@@ -70,7 +70,7 @@ function attempt(guess) {
 
 function updateSearches(list) {
   let rList = document.getElementsByClassName('sResult');
-  for(var i = 0; i < rList.length; i++) {
+  for (var i = 0; i < rList.length; i++) {
     if (i >= list.length) { //not enough results
       rList[i].classList.add('hidden');
     } else {
@@ -79,7 +79,7 @@ function updateSearches(list) {
     }
   }
   changeText('animeTotalCount', list.length);
-  changeText('resultCount', list.length < 5? list.length : 5);
+  changeText('resultCount', list.length < 5 ? list.length : 5);
 
 }
 
@@ -214,12 +214,21 @@ $(document).ready(function() {
   });
 
   document.getElementById('guessInput').addEventListener('input', function() {
+    if (this.value.length > 0) {
+      unhideElement('resultBox');
+      unhideElement('darkbackground');
+    } else {
+      hideElement('resultBox');
+      hideElement('darkbackground');
+    }
     search(this.value);
   });
 
   document.getElementById('guessInput').addEventListener('focus', function() {
-    unhideElement('resultBox');
-    unhideElement('darkbackground');
+    if (this.value.length > 0) {
+      unhideElement('resultBox');
+      unhideElement('darkbackground');
+    }
   });
   document.getElementById('darkbackground').addEventListener('click', function() {
     hideElement('resultBox');
@@ -227,7 +236,7 @@ $(document).ready(function() {
   });
 
   let rList = document.getElementsByClassName('sResult');
-  for(var i = 0; i < rList.length; i++) {
+  for (var i = 0; i < rList.length; i++) {
     rList[i].addEventListener('click', function() {
       document.getElementById('guessInput').value = this.innerText;
       hideElement('resultBox');
