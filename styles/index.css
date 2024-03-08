@@ -1,0 +1,8 @@
+input:focus {
+  outline: none;
+}
+
+.activeAttempt {
+  border-width: 2px !important;
+  border-color: rgb(20 184 166 / var(--tw-border-opacity)) !important;
+}
