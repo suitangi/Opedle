@@ -85,9 +85,14 @@ function updateSearches(list) {
 
 function search(input) {
   let r = [];
-  window.opedle.animelist.forEach(name => {
-    if (name.toLowerCase().indexOf(input.toLowerCase()) != -1)
-      r.push(name);
+  window.opedle.animelist.forEach(nameList => {
+    nameList.some(name => {
+      if (name.toLowerCase().indexOf(input.toLowerCase()) != -1) {
+        r.push(name);
+        return true;
+      }
+    });
+
   });
   updateSearches(r);
 }
@@ -133,7 +138,7 @@ $(document).ready(function() {
     .then(response => response.json())
     .then(data => {
       window.opedle.animelist = data;
-      updateSearches(window.opedle.animelist)
+      search('');
     })
     .catch(function() {
       console.error('Could not fetch anime list');
@@ -169,7 +174,7 @@ $(document).ready(function() {
   });
 
   submitButton.addEventListener('click', function() {
-    
+
   });
 
   function resetGame() {
